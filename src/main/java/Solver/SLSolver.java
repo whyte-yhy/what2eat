@@ -1,6 +1,6 @@
 package Solver;
 
-public class SLSolver implements Solver {
+public class SLSolver extends Solver {
     @Override
     public void search() {
 

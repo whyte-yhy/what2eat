@@ -1,5 +1,7 @@
 package Solver;
 
-public interface Solver {
-    void search();
+public class Solver {
+    void search() {
+
+    }
 }

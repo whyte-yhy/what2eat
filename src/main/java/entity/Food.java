@@ -7,6 +7,8 @@ public class Food {
     Nutrient[] nutrients;
 
     String foodName;
+
+    // 暂时用不到
     int[] amount;
     UnitEnum unit;
 

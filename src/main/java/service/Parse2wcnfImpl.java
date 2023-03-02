@@ -5,7 +5,7 @@ import entity.Nutrient;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Parse2wcnfImpl implements Parse2wcnf {
+public class Parse2wcnfImpl extends Parse2wcnf {
 
     Nutrient[] nutrients;
     //List<LinkedList<>>

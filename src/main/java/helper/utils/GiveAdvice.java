@@ -18,24 +18,28 @@ public class GiveAdvice {
     // bloom过滤器
     BloomFilter bloomFilter = LoadRealizerUtil.filter;
 
-    public String getAdvice(String content) {
-        StringBuilder advice = new StringBuilder("");
+    Map<String, String> advice = new HashMap<>();
+
+    public Map<String, String> getAdvice(String content) {
+        //StringBuilder advice = new StringBuilder("");
         firedRules.clear();
         content = extractKeyWds(content);
         while (true) {
             String[] answer = process(content);
 
             //System.out.println(Arrays.toString(answer));
-            if (answer[0].equals("1")) {
-                advice.append(answer[1]);
+            if ("1".equals(answer[0])) {  // 1 表示有回答
+                //advice.append(answer[1]);
+                //System.out.println(answer[1]);
                 content = content + " " + answer[2];
                 //System.out.println(content);
             }
             else break;
         }
-        if (advice.toString().equals(""))
-            return "抱歉，系统规则尚未完善，请联系管理员更新规则库。\n";
-        else return advice.toString();
+        return advice;
+//        if ("".equals(advice.toString()))
+//            return "抱歉，系统规则尚未完善，请联系管理员更新规则库。\n";
+//        else return advice.toString();
     }
 
     // 操作了两张hashmap，一个是词树，一个是局部的树
@@ -76,6 +80,7 @@ public class GiveAdvice {
                                 // 存在结论
                                 firedRules.add(tempInductionProcess.toString());
                                 //System.out.println(firedRules);
+                                advice.put(nowWord, key);  // new
                                 StringBuilder ans = new StringBuilder("因为");
                                 ans.append(tempInductionProcess);
                                 conclusion.append(ans);

@@ -1,5 +1,6 @@
 import Solver.SLSolver;
 import entity.Nutrient;
+import entity.Person;
 import helper.utils.JudgeUtil;
 import service.Parse2wcnf;
 import service.Parse2wcnfImpl;
@@ -17,10 +18,22 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         // 0. 接收需求
-        String words = "";
+        // TODO: 待完善（rewrite）
+        /* 格式示例：
+        男
+        178
+        67
+        学生，司机
+        * */
+        System.out.println("请描述您的性别、身高、体重、职业（用于判断劳动强度），回车分隔");
+        Scanner sc1 = new Scanner(System.in);
+        Person.getInstance().setGender(sc1.next());
+        Person.getInstance().setHeight(sc1.nextFloat());
+        Person.getInstance().setWeight(sc1.nextFloat());
+        Person.getInstance().setOccupation(sc1.next());
 
         // 1. 理解需求，转换为营养成分
-        RealizeUrNeed realizer = new RealizeUrNeedImpl(words);
+        RealizeUrNeed realizer = new RealizeUrNeedImpl(Person.getInstance().getOccupation());
         Nutrient[] nutrients = realizer.checkKeywordsAndGetNeed();
 
         // 1.1 初始化需求营养集合

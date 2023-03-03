@@ -10,7 +10,7 @@ import java.util.LinkedList;
 * */
 public class NutrientDiff {
 
-    LinkedList<Nutrient> nutrientsNeed;
+    LinkedList<Nutrient> nutrientsNeed = new LinkedList<>();
 
     private final static NutrientDiff NUTRIENT_DIFF = new NutrientDiff();
 

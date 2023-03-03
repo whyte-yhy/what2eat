@@ -1,7 +1,7 @@
 package enumutil;
 
 public enum UnitEnum {
-    mg("毫克"), g("克"), kg("千克");
+    mg("毫克"), g("克"), kg("千克"), kcal("千焦");
 
     private String weightUnit;
 

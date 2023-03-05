@@ -1,6 +1,8 @@
 package sysinfo;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /*
@@ -21,11 +23,25 @@ public class Assignment {
     }
 
     public void allocateAssignment(int size) {
-        assignment = new HashMap<>(size);
+        assignment = new LinkedHashMap<>(size);
     }
 
-    public void setFood(String foodName, Byte value) {  // 翻转用 1-val 就可以了
-        assignment.put(foodName, value);
+    public void loadFoods(String filepath) throws IOException {
+        File fin = new File(filepath);
+
+        FileInputStream fis = new FileInputStream(fin);
+        //Construct BufferedReader from InputStreamReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            assignment.put(line, (byte) 0);
+        }
+        br.close();
+    }
+
+    public void flipFood(String foodName, Byte value) {  // 翻转用 1-val 就可以了
+        assignment.put(foodName, (byte) (1 - value));
     }
 
     public Map<String, Byte> getAssignment() {

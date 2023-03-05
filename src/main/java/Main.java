@@ -1,4 +1,4 @@
-import Solver.SLSolver;
+import MySolver.SLSolver;
 import entity.Nutrient;
 import entity.Person;
 import helper.utils.JudgeUtil;
@@ -43,12 +43,13 @@ public class Main {
         // 当前版本只用能量进行计算
         //EER = new Nutrient(nutrients[0].getName(), nutrients[0].getAmount(), nutrients[0].getUnit());
 
-        // 2. 转换为wcnf
-        Parse2wcnf parser = new Parse2wcnfImpl(nutrients);
+        // 2. 转换为wcnf，得先准备好菜谱数据库
+        Parse2wcnf parser = new Parse2wcnfImpl();
         String targetFilename = parser.pipline();
 
         // 初始化赋值
-        Assignment.getInstance().allocateAssignment(parser.getVar_num() + 1);  // var下标从1开始
+        Assignment.getInstance().allocateAssignment(parser.getVar_num() + 1);
+        Assignment.getInstance().loadFoods("food.txt");  //TODO:
 
         boolean res = false;
         while (!res) {

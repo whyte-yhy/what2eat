@@ -1,6 +1,6 @@
-package Solver;
+package MySolver;
 
-public class SLSolver extends Solver {
+public class SLSolver extends MySolver {
 
     public SLSolver() {
 

@@ -24,9 +24,8 @@ public class NutrientDiff {
         return nutrientsNeed;
     }
 
-    public LinkedList<Nutrient> addNutrientsNeed(Nutrient nutrientNeed) {
+    public void addNutrientsNeed(Nutrient nutrientNeed) {
         this.nutrientsNeed.add(nutrientNeed);
-        return this.nutrientsNeed;
     }
 
     //TODO: 完成得分的计算

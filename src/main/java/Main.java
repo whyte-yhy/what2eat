@@ -9,6 +9,9 @@ import service.RealizeUrNeedImpl;
 import sysinfo.Assignment;
 import sysinfo.NutrientDiff;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Main {
@@ -43,39 +46,61 @@ public class Main {
         // 当前版本只用能量进行计算
         //EER = new Nutrient(nutrients[0].getName(), nutrients[0].getAmount(), nutrients[0].getUnit());
 
+        // 初始化赋值
+        Assignment.getInstance().loadFoods("src/main/resources/food.txt");  //TODO:
+
         // 2. 转换为wcnf，得先准备好菜谱数据库
         Parse2wcnf parser = new Parse2wcnfImpl();
         String targetFilename = parser.pipline();
 
-        // 初始化赋值
-        Assignment.getInstance().allocateAssignment(parser.getVar_num() + 1);
-        Assignment.getInstance().loadFoods("food.txt");  //TODO:
+        // 3. 求解
+//        String command = "./bin/HRP-C-printsolu " + targetFilename; // C++ 可执行文件的路径和名称
+//        Runtime runtime = Runtime.getRuntime();
+//        Process process = runtime.exec(command);
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//        String line;
+//        while ((line = reader.readLine()) != null) {
+//            System.out.println(line);
+//        }
 
-        boolean res = false;
-        while (!res) {
-            // 3. 调用求解器求解
-            SLSolver solver = new SLSolver();
-            solver.search();
-
-            // 4. 判断是否接受当前解
-            JudgeUtil judge = new JudgeUtil();
-            res = judge.judge();
-
-            // 5. 输入额外请求或用户确定接受
-            if (res) {
-                Scanner sc = new Scanner(System.in);
-                String txt = sc.next();
-                if ("yes".equals(txt)) break;
-                else {
-                    // 写入额外规则
-
-                    res = false;
-                }
-            }
+        ProcessBuilder builder = new ProcessBuilder("./bin/HRP-C-printsolu");
+        builder.redirectErrorStream(true);
+        Process process = builder.start();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
         }
+        int exitCode = process.waitFor();
+        System.out.println("Exited with error code " + exitCode);
 
-        if (res) {
-            // 打印信息
-        }
+
+
+//        boolean res = false;
+//        while (!res) {
+//            // 3. 调用求解器求解
+//            SLSolver solver = new SLSolver();
+//            solver.search();
+//
+//            // 4. 判断是否接受当前解
+//            JudgeUtil judge = new JudgeUtil();
+//            res = judge.judge();
+//
+//            // 5. 输入额外请求或用户确定接受
+//            if (res) {
+//                Scanner sc = new Scanner(System.in);
+//                String txt = sc.next();
+//                if ("yes".equals(txt)) break;
+//                else {
+//                    // 写入额外规则
+//
+//                    res = false;
+//                }
+//            }
+//        }
+//
+//        if (res) {
+//            // 打印信息
+//        }
     }
 }

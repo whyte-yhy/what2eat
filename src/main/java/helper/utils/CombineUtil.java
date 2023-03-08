@@ -31,4 +31,14 @@ public class CombineUtil {
         }
     }
 
+    public static void main(String[] args) {
+        List<List<Integer>> combine = new CombineUtil().combine(30, 10);
+        for (List<Integer> p : combine) {
+            for (Integer i : p) {
+                System.out.print(p + " ");
+            }
+            System.out.println();
+        }
+    }
+
 }

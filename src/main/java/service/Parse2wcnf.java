@@ -1,5 +1,7 @@
 package service;
 
+import java.io.IOException;
+
 public class Parse2wcnf {
 
     int var_num;
@@ -10,12 +12,12 @@ public class Parse2wcnf {
     int soft_clause_num;
     long hard_weight;
 
-    void parse(){}
+    void parse() throws IOException {}
     String write2file(){
         return "";
     }
 
-    public String pipline() {
+    public String pipline() throws IOException {
         parse();
         return write2file();
     }

@@ -127,7 +127,7 @@ public class GiveAdvice {
         String newContent = "";
         if (extractedContent.length()>0)
             newContent = extractedContent.deleteCharAt(extractedContent.length()-1).toString();
-        //System.out.println("newContent: "+newContent);
+        System.out.println("newContent: "+newContent);
         return newContent;
     }
 }

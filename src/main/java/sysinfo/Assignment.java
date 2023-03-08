@@ -12,7 +12,7 @@ public class Assignment {
 
 //    private byte[] assigment;
 //    private String varName;  // 同foodName，保证变量的赋值和对应的食物顺序一致
-    private Map<String, Byte> assignment;
+    private Map<String, Byte> assignment = new LinkedHashMap<>();
 
     private final static Assignment ASSIGNMENT = new Assignment();
 
@@ -22,9 +22,9 @@ public class Assignment {
         return ASSIGNMENT;
     }
 
-    public void allocateAssignment(int size) {
-        assignment = new LinkedHashMap<>(size);
-    }
+//    public void allocateAssignment(int size) {
+//        assignment = new LinkedHashMap<>(size);
+//    }
 
     public void loadFoods(String filepath) throws IOException {
         File fin = new File(filepath);

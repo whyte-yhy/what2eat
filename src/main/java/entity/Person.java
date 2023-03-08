@@ -6,6 +6,7 @@ public class Person {
     float weight;
     String occupation;
 
+
     float BMI;
     float standardWeight;
     String bodyType;
